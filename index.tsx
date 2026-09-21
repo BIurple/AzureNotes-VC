@@ -67,8 +67,8 @@ function ToolBarHeader() {
 }
 
 export default definePlugin({
-    name: "HolyNotes",
-    description: "Holy Notes allows you to save messages",
+    name: "AzureNotes",
+    description: "Azure Notes allows you to save messages, similar to Discord's Bookmark feature.",
     authors: [{ id: 347096063569559553n, name: "wolfieeeeeeee" }],
     dependencies: ["MessagePopoverAPI", "ChatInputButtonAPI"],
 
