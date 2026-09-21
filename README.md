@@ -1,7 +1,7 @@
 # ⚠️ INTENDED FOR MY PERSONAL USE
 Though I decided to revive this project, it's solely intended for my personal use, I won't look into issues, Pull requests are welcomed.
 
-# ❌ VIBECODING DISCLAIMER
+# ❌ VIBECODING/AI DISCLAIMER
 Parts of this plugin (Originally HolyNotes) have been broken for a while, which were fixed by the usage of AI, I've tested it thru and thru and it works, although nothing's guaranteed.
 
 
