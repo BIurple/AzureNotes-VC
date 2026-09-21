@@ -1,4 +1,8 @@
-# Holy Notes
+# ⚠️⚠️ THIS IS FOR PERSONAL USE ONLY, I AM NOT RESPONSIBLE FOR FIXING ANY ISSUES THAT ARISE UNLESS A PULL REQUEST IS MADE ⚠️⚠️
+
+
+
+# Azure Notes
 
 Plugin to save messages on a personal notebook, u can store a large amount of messages on this notebook
 
@@ -7,3 +11,7 @@ The installation guide can be found [here](https://discord.com/channels/10150602
 <!-- Stole this from someone else i forgot-->
 
 ![notebook](image.png)
+
+# Credits
+This entire plugin: [HolyNotes-VC](https://github.com/WolfPlugs/HolyNotes-VC)
+Fixes from a HolyNotes-VC Fork: [Benjas333's Fork](https://github.com/Benjas333/HolyNotes-VC/tree/fix/general-fix)
