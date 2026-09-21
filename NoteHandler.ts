@@ -15,25 +15,28 @@ export const noteHandlerCache = new Map<string, Record<string, HolyNotes.Note>>(
 
 export class NoteHandler {
     private _formatNote(channel: Channel, message: Message): HolyNotes.Note {
-        return {
-            id: message.id,
-            channel_id: message.channel_id,
-            guild_id: channel.guild_id,
-            content: message.content,
-            author: {
-                id: message.author.id,
-                avatar: message.author.avatar,
-                discriminator: message.author.discriminator,
-                username: message.author.username,
-            },
-            flags: message.flags,
-            timestamp: message.timestamp.toString(),
-            attachments: message.attachments as Discord.Attachment[],
-            embeds: message.embeds,
-            reactions: message.reactions as Discord.Reaction[],
-            stickerItems: message.stickerItems,
-        };
-    }
+    const rawNote = {
+        id: message.id,
+        channel_id: message.channel_id,
+        guild_id: channel.guild_id,
+        content: message.content,
+        author: {
+            id: message.author.id,
+            avatar: message.author.avatar,
+            discriminator: message.author.discriminator,
+            username: message.author.username,
+        },
+        flags: message.flags,
+        timestamp: message.timestamp.toString(),
+        attachments: message.attachments as Discord.Attachment[],
+        embeds: message.embeds,
+        reactions: message.reactions as Discord.Reaction[],
+        stickerItems: message.stickerItems,
+    };
+
+    // Drops all Discord getter functions & rich prototype methods
+    return JSON.parse(JSON.stringify(rawNote));
+}
 
     public getNotes(notebook?: string): Record<string, HolyNotes.Note> {
         if (!notebook) return {};
