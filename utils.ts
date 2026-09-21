@@ -15,7 +15,9 @@ export const HolyNoteStore = createStore("HolyNoteData", "HolyNoteStore");
 
 export async function saveCacheToDataStore(key: string, value: Record<string, HolyNotes.Note>) {
     try {
-        await DataStore.set(key, value, HolyNoteStore);
+        // Strip non-cloneable functions/methods attached by Discord internals
+        const cleanValue = JSON.parse(JSON.stringify(value));
+        await DataStore.set(key, cleanValue, HolyNoteStore);
     } catch (err) {
         console.error("[HolyNotes] Failed to save note to DataStore:", err);
     }
