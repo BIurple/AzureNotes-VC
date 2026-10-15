@@ -6,7 +6,7 @@
 
 import { Channel, Message } from "@vencord/discord-types";
 import { findByCode } from "@webpack";
-import { ChannelStore, lodash, Toasts, UserStore } from "@webpack/common";
+import { ChannelStore, lodash, showToast, UserStore } from "@webpack/common";
 
 import { Discord, HolyNotes } from "./types";
 import { deleteCacheFromDataStore, DeleteEntireStore, saveCacheToDataStore } from "./utils";
@@ -64,10 +64,9 @@ export class NoteHandler {
         noteHandlerCache.set(notebook, newNotes);
         await saveCacheToDataStore(notebook, newNotes);
 
-        Toasts.show({
-            id: Toasts.genId(),
-            message: `Successfully added note to ${notebook}.`,
-            type: Toasts.Type.SUCCESS,
+        showToast({
+            text: `Successfully added note to ${notebook}.`,
+            variant: "success",
         });
     }
 
@@ -78,10 +77,9 @@ export class NoteHandler {
         noteHandlerCache.set(notebook, updated);
         await saveCacheToDataStore(notebook, updated);
 
-        Toasts.show({
-            id: Toasts.genId(),
-            message: `Successfully deleted note from ${notebook}.`,
-            type: Toasts.Type.SUCCESS,
+        showToast({
+            text: `Successfully deleted note from ${notebook}.`,
+            variant: "success",
         });
     }
 
@@ -98,20 +96,18 @@ export class NoteHandler {
         await saveCacheToDataStore(from, updatedFrom);
         await saveCacheToDataStore(to, newNoteBook);
 
-        Toasts.show({
-            id: Toasts.genId(),
-            message: `Successfully moved note from ${from} to ${to}.`,
-            type: Toasts.Type.SUCCESS,
+        showToast({
+            text: `Successfully moved note from ${from} to ${to}.`,
+            variant: "success",
         });
     }
 
     public async newNoteBook(notebookName: string, silent?: boolean) {
         if (noteHandlerCache.has(notebookName)) {
             if (!silent) {
-                Toasts.show({
-                    id: Toasts.genId(),
-                    message: `Notebook ${notebookName} already exists.`,
-                    type: Toasts.Type.FAILURE,
+                showToast({
+                    text: `Notebook ${notebookName} already exists.`,
+                    variant: "critical",
                 });
             }
             return;
@@ -121,10 +117,9 @@ export class NoteHandler {
         await saveCacheToDataStore(notebookName, {});
 
         if (!silent) {
-            Toasts.show({
-                id: Toasts.genId(),
-                message: `Successfully created ${notebookName}.`,
-                type: Toasts.Type.SUCCESS,
+            showToast({
+                text: `Successfully created ${notebookName}.`,
+                variant: "success",
             });
         }
     }
@@ -133,10 +128,9 @@ export class NoteHandler {
         noteHandlerCache.delete(notebookName);
         await deleteCacheFromDataStore(notebookName);
 
-        Toasts.show({
-            id: Toasts.genId(),
-            message: `Successfully deleted ${notebookName}.`,
-            type: Toasts.Type.SUCCESS,
+        showToast({
+            text: `Successfully deleted ${notebookName}.`,
+            variant: "success",
         });
     }
 
@@ -162,10 +156,9 @@ export class NoteHandler {
             await saveCacheToDataStore(notebook, notebooks[notebook]);
         }
 
-        Toasts.show({
-            id: Toasts.genId(),
-            message: "Successfully refreshed avatars.",
-            type: Toasts.Type.SUCCESS,
+        showToast({
+            text: "Successfully refreshed avatars.",
+            variant: "success",
         });
     }
 
@@ -173,10 +166,9 @@ export class NoteHandler {
         noteHandlerCache.clear();
         await DeleteEntireStore();
 
-        Toasts.show({
-            id: Toasts.genId(),
-            message: "Successfully deleted all notes.",
-            type: Toasts.Type.SUCCESS,
+        showToast({
+            text: "Successfully deleted all notes.",
+            variant: "success",
         });
     }
 
@@ -193,17 +185,15 @@ export class NoteHandler {
                 await saveCacheToDataStore(notebook, parseNotes[notebook]);
             }
 
-            Toasts.show({
-                id: Toasts.genId(),
-                message: "Successfully imported notes.",
-                type: Toasts.Type.SUCCESS,
+            showToast({
+                text: "Successfully imported notes.",
+                variant: "success",
             });
         } catch (e) {
             console.error("[HolyNotes] Import error:", e);
-            Toasts.show({
-                id: Toasts.genId(),
-                message: "Invalid JSON.",
-                type: Toasts.Type.FAILURE,
+            showToast({
+                text: "Invalid JSON.",
+                variant: "critical",
             });
         }
     }
